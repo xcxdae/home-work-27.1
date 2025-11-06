@@ -3,30 +3,47 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Home-work-21</title>
 </head>
 
 <body>
 
-  <div id="carousel">
-    <div id="slides-container">
-      <div class="slide active"></div>
-      <div class="slide"></div>
-      <div class="slide"></div>
+  <div id="carousel" class="carousel">
+
+    <div id="slides-container" class="slides">
+      <div class="slide active">Slide 1</div>
+      <div class="slide">Slide 2</div>
+      <div class="slide">Slide 3</div>
+      <div class="slide">Slide 4</div>
+      <div class="slide">Slide 5</div>
     </div>
-    <div id="indicators-container">
-      <div class="indicator active" data-slide-to="0"></div>
-      <div class="indicator" data-slide-to="1"></div>
+
+    <div id="controls-container" class="controls">
+      <div id="pause-btn" class="control control-pause">
+        <i class="fas fa-pause"></i>
+      </div>
+      <div id="previous-btn" class="control control-prev">
+        <i class="fa fa-chevron-left"></i>
+      </div>
+      <div id="next-btn" class="control control-next">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+
+    <div id="indicators-container" class="indicators">
+      <div class="indicator active" data-slide-to="1"></div>
       <div class="indicator" data-slide-to="2"></div>
+      <div class="indicator" data-slide-to="3"></div>
+      <div class="indicator" data-slide-to="4"></div>
+      <div class="indicator" data-slide-to="5"></div>
     </div>
-    <div id="controls-container">
-      <button id="pause-btn"><i class="fas fa-pause"></i></button>
-      <button id="prev-btn"></button>
-      <button id="next-btn"></button>
-    </div>
+
   </div>
 
-  <script src="main.js" type="module"></script>
+  <script src="index.js" type="module"></script>
 
 </body>
 

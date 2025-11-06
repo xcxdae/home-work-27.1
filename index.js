@@ -1,14 +1,14 @@
 const container = document.querySelector('#carousel')
-const slidesContaienr = container.querySelector('#slides-container')
-const slides = document.querySelectorAll('.slide')
+const slidesContainer = container.querySelector('#slides-container')
+const slides = container.querySelectorAll('.slide')
 const indicatorsContainer = container.querySelector('#indicators-container')
 const indicators = container.querySelectorAll('.indicator')
-const pauseBtn = document.querySelectorAll('#pause-btn')
+const pauseBtn = container.querySelector('#pause-btn')
 const previousBtn = container.querySelector('#previous-btn')
 const nextBtn = container.querySelector('#next-btn')
 
 
-const SLIDES_COUNT = slides.lenght
+const SLIDES_COUNT = slides.length
 const CODE_ARROW_LEFT = 'ArrowLeft'
 const CODE_ARROW_RIGHT = 'ArrowRight'
 const CODE_SPACE = 'Space'
@@ -19,20 +19,20 @@ const SWIPE_THRESHOLD = 100
 
 
 let currentSlide = 0
-let timesId = null
+let timerId = null
 let isPlaying = true
 let swipeStartX = null
 let swipeEndX = null
 
 function gotoNth(n) {
-    slides[currentSlide].classList.toggle('ative')
-    indicators[currentSlide].clasList.toggle('active')
+    slides[currentSlide].classList.toggle('active')
+    indicators[currentSlide].classList.toggle('active')
 
     indicators[currentSlide].style.background = null
 
     currentSlide = (n + SLIDES_COUNT) % SLIDES_COUNT
-    slides[currentSlide].classList.toggle('ative')
-    indicators[currentSlide].clasList.toggle('active')
+    slides[currentSlide].classList.toggle('active')
+    indicators[currentSlide].classList.toggle('active')
 
     indicators[currentSlide].style.background = window.getComputedStyle(slides[currentSlide]).background
 }
@@ -46,25 +46,25 @@ function gotoNext() {
 }
 
 function tick() {
-    timesId = setInterval(gotoNth, TIMER_INTERVAL) 
+    timerId = setInterval(gotoNext, TIMER_INTERVAL)
 }
 
 function pauseHandler() {
     if (!isPlaying) return
     pauseBtn.innerHTML = FA_PLAY
     isPlaying = !isPlaying 
-    clearInterval(timesId)
+    clearInterval(timerId)
 }
 
-function pauseHandler() {
+function playHandler() {
     if (isPlaying) return
     pauseBtn.innerHTML = FA_PAUSE
     isPlaying = !isPlaying 
-    clearInterval(timesId)
+    tick()
 }
 
 function togglePlayHandler() {
-    isPlaying ? pauseHandler() : togglePlayHandler() 
+    isPlaying ? pauseHandler() : playHandler() 
 }
 
 function nextHandler() {
@@ -78,10 +78,10 @@ function prevHandler() {
 }
 
 function indicatorClickHandler(e) {
-    const {target} = e
+    const { target } = e
     if (target && target.classList.contains('indicator'))  {
         pauseHandler()
-        gotoNth(+target.dataset.slideto)
+        gotoNth(+target.dataset.slideTo)
     }
 }
 
@@ -90,9 +90,10 @@ function keydownHandler(e) {
 
     if (code == CODE_ARROW_LEFT) prevHandler()
     if (code == CODE_ARROW_RIGHT) nextHandler()
-    if (code == CODE_SPACE) 
+    if (code == CODE_SPACE) {
         e.preventDefoult()
         togglePlayHandler()
+    }
 }
 
 function swipeStartHadler(e) {
@@ -114,10 +115,10 @@ function initEventListeners() {
     nextBtn.addEventListener('click', nextHandler)
     indicatorsContainer.addEventListener('click', indicatorClickHandler)
     document.addEventListener('keydown', keydownHandler)
-    slidesContaienridesContainer.addEventListener('touchstart', swipeStartHadler, { passive: true }) 
-    slidesContaienrlidesContainer.addEventListener('mousedown', swipeStartHadler)
-    slidesContaienrlidesContainer.addEventListener('touchend', swipeEndHadler)
-    slidesContaienrlidesContainer.addEventListener('mouseup', swipeEndHadler)
+    slidesContainer.addEventListener('touchstart', swipeStartHadler, { passive: true }) 
+    slidesContainer.addEventListener('mousedown', swipeStartHadler)
+    slidesContainer.addEventListener('touchend', swipeEndHadler)
+    slidesContainer.addEventListener('mouseup', swipeEndHadler)
 }
 
 function init() {
